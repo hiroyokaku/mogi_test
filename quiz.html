@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>クイズ</title>
+</head>
+<body>
+    <h1>クイズ開始！</h1>
+    <p id="question">ここに問題が表示されます</p>
+    <button onclick="loadRandomQuestion()">次の問題</button>
+
+    <script>
+        let questions = [];
+
+        function loadData() {
+            const csvData = localStorage.getItem("csvData");
+            if (!csvData) {
+                alert("問題データがありません！");
+                window.location.href = "index.html";
+                return;
+            }
+            const lines = csvData.split("\n").map(line => line.split(","));
+            questions = lines.filter(row => row.length >= 3); // 問題がちゃんとあるかチェック
+            loadRandomQuestion();
+        }
+
+        function loadRandomQuestion() {
+            if (questions.length === 0) {
+                document.getElementById("question").textContent = "問題がありません！";
+                return;
+            }
+            let randomIndex = Math.floor(Math.random() * questions.length);
+            let questionText = questions[randomIndex][1].replace(/\n/g, "<br>"); // 改行対応
+            document.getElementById("question").innerHTML = questionText;
+        }
+
+        window.onload = loadData;
+    </script>
+</body>
+</html>
+
