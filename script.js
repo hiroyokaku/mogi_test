@@ -1,24 +1,39 @@
 document.getElementById("fileInput").addEventListener("change", handleFileSelect);
+document.getElementById("loadFile").addEventListener("click", loadFile);
 document.getElementById("loadQuestion").addEventListener("click", loadRandomQuestion);
 document.getElementById("checkAnswer").addEventListener("click", checkAnswer);
 
 let questions = [];
+let fileSelected = false; // ファイルが選択されたかチェック
 
 function handleFileSelect(event) {
-    const file = event.target.files[0];
-    if (!file) return;
+    fileSelected = !!event.target.files[0]; // ファイルが選択されたかをチェック
+}
 
+function loadFile() {
+    if (!fileSelected) {
+        alert("ファイルを選択してください！");
+        return;
+    }
+
+    const file = document.getElementById("fileInput").files[0];
     const reader = new FileReader();
+
     reader.onload = function(e) {
         const text = e.target.result;
         let rows = text.split("\n").map(row => row.split(","));
         rows.shift(); // ヘッダーを削除
-        questions = rows;
+        questions = rows.filter(row => row.length >= 3); // データのチェック
         
-        // ボタンを有効化
-        document.getElementById("loadQuestion").disabled = false;
-        document.getElementById("checkAnswer").disabled = false;
+        if (questions.length > 0) {
+            document.getElementById("loadQuestion").disabled = false;
+            document.getElementById("checkAnswer").disabled = false;
+            alert("データを読み込みました！");
+        } else {
+            alert("正しいCSVファイルを選択してください。");
+        }
     };
+
     reader.readAsText(file);
 }
 
