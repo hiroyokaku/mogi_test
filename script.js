@@ -52,41 +52,37 @@ function loadFile() {
     reader.readAsText(file);
 }
 
-// 問題文をランダムに読み込む
 function loadRandomQuestion() {
     const questionElement = document.getElementById("question");
     const answerElement = document.getElementById("answer");
 
+    // もし問題がなければ表示しない
     if (questions.length === 0) {
         questionElement.textContent = "問題がありません！";
         return;
     }
 
+    // ランダムに問題を選んで表示
     let randomIndex = Math.floor(Math.random() * questions.length);
     let questionText = questions[randomIndex][1].replace(/\n/g, "<br>");
     let answerText = questions[randomIndex][2];
-    
+
+    // 問題文を表示
     questionElement.innerHTML = questionText;
     answerElement.textContent = answerText;
 
-    // アニメーションを追加
+    // 問題文は表示、答えは非表示に
     questionElement.classList.add("show");
-    answerElement.classList.add("show");
+    answerElement.classList.remove("show");
+
+    // 答えを表示するボタンを表示
+    document.getElementById("showAnswerBtn").style.display = "block";
 }
 
-// 答えを表示する
 function showAnswer() {
-    document.getElementById("answer").style.display = "block"; // 答えを表示
-    document.getElementById("showAnswerBtn").style.display = "none"; // 答えボタンを非表示
+    // 答えを表示
+    document.getElementById("answer").classList.add("show");
+    // 「答えを表示」ボタンは非表示
+    document.getElementById("showAnswerBtn").style.display = "none";
 }
 
-// 答えを入力してもらって確認する
-function checkAnswer() {
-    let userAnswer = document.getElementById("answer").value.trim();
-    let correctAnswer = document.getElementById("question").dataset.answer.trim();
-    if (userAnswer === correctAnswer) {
-        document.getElementById("result").textContent = "正解！";
-    } else {
-        document.getElementById("result").textContent = "不正解。正解は: " + correctAnswer;
-    }
-}
