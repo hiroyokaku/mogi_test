@@ -1,44 +1,19 @@
+// イベントリスナー
 document.getElementById("fileInput").addEventListener("change", handleFileSelect);
 document.getElementById("loadFile").addEventListener("click", loadFile);
 document.getElementById("loadQuestion").addEventListener("click", loadRandomQuestion);
 document.getElementById("checkAnswer").addEventListener("click", checkAnswer);
 
-
-
-//ファイルを読み込む
-function saveData() {
-            const fileInput = document.getElementById("fileInput");
-            if (!fileInput.files.length) {
-                alert("ファイルを選択してください！");
-                return;
-            }
-
-            const reader = new FileReader();
-            reader.onload = function(event) {
-                localStorage.setItem("csvData", event.target.result); // データを保存
-                window.location.href = "quiz.html"; // クイズページへ移動
-            };
-            reader.readAsText(fileInput.files[0]);
-        }
-
-// ファイルが選択されたかをチェック
-function handleFileSelect(event) {
-    fileSelected = !!event.target.files[0]; 
-}
-
-
-
-// ボタンをクリックした時に問題文を表示
-document.getElementById('showButton').addEventListener('click', function() {
-    // 問題文を表示
-    document.getElementById('question').classList.add('show');
-    // 答えを表示したい場合も同様に
-    document.getElementById('answer').classList.add('show');
-});
-
+// グローバル変数
 let questions = [];
 let fileSelected = false; // ファイルが選択されたかチェック
 
+// ファイルが選択されたかをチェック
+function handleFileSelect(event) {
+    fileSelected = !!event.target.files[0]; // ファイルが選ばれたかチェック
+}
+
+// ファイルを読み込む
 function loadFile() {
     if (!fileSelected) {
         alert("ファイルを選択してください！");
@@ -48,22 +23,13 @@ function loadFile() {
     const file = document.getElementById("fileInput").files[0];
     const reader = new FileReader();
 
-    //ファイルを読み込んだあとに動く処理が以下のfunction(e)
     reader.onload = function(e) {
         const text = e.target.result;
-        //最初のsplitで改行で分割、そして分割したものをカンマで分割（２回目のsplit）
         let rows = text.split("\n").map(row => row.split(","));
-         // ヘッダーを削除
-        rows.shift();
-        // データチェック
-        //filter() を使って 「3つ以上のデータがある行だけを残す」
-        // 「問題番号・問題文・答え」の3つがそろっている行だけを questions に保存する
-        //データが不完全な行を削除し、問題データとして使えるものだけを残す
-        questions = rows.filter(row => row.length >= 3); 
+        rows.shift(); // ヘッダーを削除
+        questions = rows.filter(row => row.length >= 3); // 必要なデータが3つ以上ある行をフィルタリング
 
-        //フィルタした数が１以上だったら問題として表示
         if (questions.length > 0) {
-            //非活性をfalse
             document.getElementById("loadQuestion").disabled = false;
             document.getElementById("checkAnswer").disabled = false;
             alert("データを読み込みました！");
@@ -75,19 +41,20 @@ function loadFile() {
     reader.readAsText(file);
 }
 
-//問題文をランダムで読み込んでいる
+// ランダムな問題を読み込む
 function loadRandomQuestion() {
     const questionElement = document.getElementById("question");
     const answerElement = document.getElementById("answer");
- 
+
     if (questions.length === 0) {
         questionElement.textContent = "問題がありません！";
         return;
     }
-    let randomIndex = Math.floor(Math.random() * questions.length);
-    let questionText = questions[randomIndex][1].replace(/\n/g, "<br>");
-    let answerText = questions[randomIndex][2];
     
+    let randomIndex = Math.floor(Math.random() * questions.length); // ランダムなインデックス
+    let questionText = questions[randomIndex][1].replace(/\n/g, "<br>"); // 改行をHTMLタグに変換
+    let answerText = questions[randomIndex][2]; // 答え
+
     questionElement.innerHTML = questionText;
     answerElement.textContent = answerText;
 
@@ -96,14 +63,14 @@ function loadRandomQuestion() {
     answerElement.classList.add("show");
 }
 
-        function showAnswer() {
-            document.getElementById("answer").style.display = "block"; // 答えを表示
-            document.getElementById("showAnswerBtn").style.display = "none"; // 答えボタンを非表示
-        }
+// 答えを表示する
+function showAnswer() {
+    document.getElementById("answer").style.display = "block"; // 答えを表示
+    document.getElementById("showAnswerBtn").style.display = "none"; // 答えボタンを非表示
+}
 
-//答えを入力してもらって回答と一致するかみている
-//けど入力をやめたからここは不要
-/* function checkAnswer() {
+// ユーザーの答えをチェック
+function checkAnswer() {
     let userAnswer = document.getElementById("answer").value.trim();
     let correctAnswer = document.getElementById("question").dataset.answer.trim();
     if (userAnswer === correctAnswer) {
@@ -111,8 +78,4 @@ function loadRandomQuestion() {
     } else {
         document.getElementById("result").textContent = "不正解。正解は: " + correctAnswer;
     }
-} */
-
-
-
-       
+}
