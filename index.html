@@ -11,21 +11,6 @@
     <input type="file" id="fileInput" accept=".csv">
     <button onclick="saveData()">クイズを開始</button>
 
-    <script>
-        function saveData() {
-            const fileInput = document.getElementById("fileInput");
-            if (!fileInput.files.length) {
-                alert("ファイルを選択してください！");
-                return;
-            }
-
-            const reader = new FileReader();
-            reader.onload = function(event) {
-                localStorage.setItem("csvData", event.target.result); // データを保存
-                window.location.href = "quiz.html"; // クイズページへ移動
-            };
-            reader.readAsText(fileInput.files[0]);
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
