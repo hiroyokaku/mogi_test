@@ -2,7 +2,7 @@ let questions = [];
 let fileSelected = false; // ファイルが選択されたかチェック
 
 document.getElementById("fileInput").addEventListener("change", handleFileSelect);
-document.getElementById("loadFile").addEventListener("click", saveData);
+document.getElementById("loadFile").addEventListener("click", loadFile);
 document.getElementById("loadQuestion").addEventListener("click", loadRandomQuestion);
 document.getElementById("showAnswerBtn").addEventListener("click", showAnswer);
 
