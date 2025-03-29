@@ -96,10 +96,14 @@ function loadRandomQuestion() {
     answerElement.classList.add("show");
 }
 
+        function showAnswer() {
+            document.getElementById("answer").style.display = "block"; // 答えを表示
+            document.getElementById("showAnswerBtn").style.display = "none"; // 答えボタンを非表示
+        }
 
 //答えを入力してもらって回答と一致するかみている
 //けど入力をやめたからここは不要
-function checkAnswer() {
+/* function checkAnswer() {
     let userAnswer = document.getElementById("answer").value.trim();
     let correctAnswer = document.getElementById("question").dataset.answer.trim();
     if (userAnswer === correctAnswer) {
@@ -107,7 +111,7 @@ function checkAnswer() {
     } else {
         document.getElementById("result").textContent = "不正解。正解は: " + correctAnswer;
     }
-}
+} */
 
 
 
