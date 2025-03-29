@@ -4,6 +4,23 @@ document.getElementById("loadQuestion").addEventListener("click", loadRandomQues
 document.getElementById("checkAnswer").addEventListener("click", checkAnswer);
 
 
+
+//ファイルを読み込む
+function saveData() {
+            const fileInput = document.getElementById("fileInput");
+            if (!fileInput.files.length) {
+                alert("ファイルを選択してください！");
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                localStorage.setItem("csvData", event.target.result); // データを保存
+                window.location.href = "quiz.html"; // クイズページへ移動
+            };
+            reader.readAsText(fileInput.files[0]);
+        }
+
 // ファイルが選択されたかをチェック
 function handleFileSelect(event) {
     fileSelected = !!event.target.files[0]; 
@@ -58,30 +75,11 @@ function loadFile() {
     reader.readAsText(file);
 }
 
-function loadRandomQuestion() {
-    if (questions.length === 0) {
-        document.getElementById("question").textContent = "問題が読み込めませんでした。";
-        return;
-    }
-    let randomIndex = Math.floor(Math.random() * questions.length);
-    document.getElementById("question").textContent = questions[randomIndex][1]; // B列の問題文
-    document.getElementById("question").dataset.answer = questions[randomIndex][2]; // C列の答え
-
-}
-
-function checkAnswer() {
-    let userAnswer = document.getElementById("answer").value.trim();
-    let correctAnswer = document.getElementById("question").dataset.answer.trim();
-    if (userAnswer === correctAnswer) {
-        document.getElementById("result").textContent = "正解！";
-    } else {
-        document.getElementById("result").textContent = "不正解。正解は: " + correctAnswer;
-    }
-}
-
+//問題文をランダムで読み込んでいる
 function loadRandomQuestion() {
     const questionElement = document.getElementById("question");
     const answerElement = document.getElementById("answer");
+ 
     if (questions.length === 0) {
         questionElement.textContent = "問題がありません！";
         return;
@@ -99,17 +97,18 @@ function loadRandomQuestion() {
 }
 
 
-       function saveData() {
-            const fileInput = document.getElementById("fileInput");
-            if (!fileInput.files.length) {
-                alert("ファイルを選択してください！");
-                return;
-            }
+//答えを入力してもらって回答と一致するかみている
+//けど入力をやめたからここは不要
+function checkAnswer() {
+    let userAnswer = document.getElementById("answer").value.trim();
+    let correctAnswer = document.getElementById("question").dataset.answer.trim();
+    if (userAnswer === correctAnswer) {
+        document.getElementById("result").textContent = "正解！";
+    } else {
+        document.getElementById("result").textContent = "不正解。正解は: " + correctAnswer;
+    }
+}
 
-            const reader = new FileReader();
-            reader.onload = function(event) {
-                localStorage.setItem("csvData", event.target.result); // データを保存
-                window.location.href = "quiz.html"; // クイズページへ移動
-            };
-            reader.readAsText(fileInput.files[0]);
-        }
+
+
+       
