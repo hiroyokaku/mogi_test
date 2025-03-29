@@ -42,9 +42,17 @@ function loadRandomQuestion() {
         document.getElementById("question").textContent = "問題が読み込めませんでした。";
         return;
     }
-    let randomIndex = Math.floor(Math.random() * questions.length);
-    document.getElementById("question").textContent = questions[randomIndex][1]; // B列の問題文
+//    let randomIndex = Math.floor(Math.random() * questions.length);
+//    document.getElementById("question").textContent = questions[randomIndex][1]; // B列の問題文
+//    document.getElementById("question").dataset.answer = questions[randomIndex][2]; // C列の答え
+    // `\n` を `<br>` に置換して表示
+    let questionText = questions[randomIndex][1].replace(/\n/g, "<br>");
+    
+    document.getElementById("question").innerHTML = questionText; // innerHTMLで改行を適用
     document.getElementById("question").dataset.answer = questions[randomIndex][2]; // C列の答え
+
+
+
 }
 
 function checkAnswer() {
