@@ -27,22 +27,3 @@ button:hover {
 }
 
 
-#question, #answer {
-    opacity: 0;
-    transition: opacity 1s ease-in-out;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* カードの影 */
-    margin: 20px auto;
-    max-width: 500px;
-    display: none; /* 最初は非表示 */
-}
-
-
-/* `.show`クラスが追加されると、opacityが1になり、表示される */
-#question.show, #answer.show {
-    opacity: 1;
-    display: block; /* 表示する */
-}
-
-
