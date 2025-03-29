@@ -27,7 +27,7 @@ button:hover {
 }
 
 
-#question, #answer {
+#question {
     margin: 20px auto;
     max-width: 500px;
 }
