@@ -2,6 +2,13 @@ document.getElementById("fileInput").addEventListener("change", handleFileSelect
 document.getElementById("loadFile").addEventListener("click", loadFile);
 document.getElementById("loadQuestion").addEventListener("click", loadRandomQuestion);
 document.getElementById("checkAnswer").addEventListener("click", checkAnswer);
+// ボタンをクリックした時に問題文を表示
+document.getElementById('showButton').addEventListener('click', function() {
+    // 問題文を表示
+    document.getElementById('question').classList.add('show');
+    // 答えを表示したい場合も同様に
+    document.getElementById('answer').classList.add('show');
+});
 
 let questions = [];
 let fileSelected = false; // ファイルが選択されたかチェック
