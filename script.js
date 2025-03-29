@@ -64,3 +64,23 @@ function checkAnswer() {
         document.getElementById("result").textContent = "不正解。正解は: " + correctAnswer;
     }
 }
+
+function loadRandomQuestion() {
+    const questionElement = document.getElementById("question");
+    const answerElement = document.getElementById("answer");
+    if (questions.length === 0) {
+        questionElement.textContent = "問題がありません！";
+        return;
+    }
+    let randomIndex = Math.floor(Math.random() * questions.length);
+    let questionText = questions[randomIndex][1].replace(/\n/g, "<br>");
+    let answerText = questions[randomIndex][2];
+    
+    questionElement.innerHTML = questionText;
+    answerElement.textContent = answerText;
+
+    // アニメーションを追加
+    questionElement.classList.add("show");
+    answerElement.classList.add("show");
+}
+
