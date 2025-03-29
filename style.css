@@ -1,8 +1,10 @@
 body {
     background-color: #fff9c4; /* 淡い黄色 */
-    font-family: Arial, sans-serif;
-    font-size: 18px; /* 文字を大きめに */
+    /* font-family: Arial, sans-serif;
+    /* font-size: 18px; /* 文字を大きめに */
     text-align: center;
+    font-family: 'Roboto', sans-serif; /* ロボットフォントを使用 */
+    font-size: 18px; /* フォントサイズ調整 */
 }
 
 h1 {
@@ -11,16 +13,19 @@ h1 {
 }
 
 button {
-    font-size: 14px; /* ボタンの文字を少し小さく */
-    padding: 5px 10px; /* ボタン自体も小さく */
-    background-color: #ffd54f; /* 明るい黄色 */
+    background: linear-gradient(45deg, #4CAF50, #45a049); /* グラデーションボタン */
+    color: white;
     border: none;
-    border-radius: 5px;
+    padding: 12px 24px;
+    font-size: 16px;
     cursor: pointer;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* ボタンに影を追加 */
 }
 
 button:hover {
-    background-color: #ffca28; /* ホバー時に少し濃い黄色 */
+   /* background-color: #ffca28; /* ホバー時に少し濃い黄色 */
+    background: linear-gradient(45deg, #45a049, #4CAF50); /* ホバー時に色変化 */
 }
 
 
@@ -28,6 +33,12 @@ button:hover {
 #question, #answer {
     opacity: 0;
     transition: opacity 1s ease-in-out;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* カードの影 */
+    margin: 20px auto;
+    max-width: 500px;
 }
 
 #question.show, #answer.show {
