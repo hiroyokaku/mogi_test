@@ -4,7 +4,7 @@ let fileSelected = false; // ファイルが選択されたかチェック
 document.getElementById("fileInput").addEventListener("change", handleFileSelect);
 document.getElementById("loadFile").addEventListener("click", saveData);
 document.getElementById("loadQuestion").addEventListener("click", loadRandomQuestion);
-document.getElementById("checkAnswer").addEventListener("click", checkAnswer);
+document.getElementById("showAnswerBtn").addEventListener("click", showAnswer);
 
 function saveData() {
     const fileInput = document.getElementById("fileInput");
