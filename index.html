@@ -7,27 +7,12 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>CSVクイズ</h1>
+    <h1>クイズ</h1>
 
     <!-- ファイル選択 -->
     <input type="file" id="fileInput">
     <button id="loadFile" onclick="saveData()">ファイルを読み込む</button>
 
-    <!-- クイズ表示ボタン -->
-    <button id="loadQuestion" disabled>問題を読み込む</button>
-    <button id="checkAnswer" disabled>答えを確認</button>
-
-    <!-- 問題文 -->
-    <div id="question" class="hidden">問題が表示されます</div>
-    
-    <!-- 答え -->
-    <div id="answer" class="hidden">答えが表示されます</div>
-
-    <!-- 答え表示ボタン -->
-    <button id="showAnswerBtn" style="display: none;" onclick="showAnswer()">答えを表示</button>
-
-    <!-- 結果表示 -->
-    <div id="result"></div>
 
     <script src="script.js"></script>
 </body>
