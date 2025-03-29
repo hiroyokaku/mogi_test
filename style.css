@@ -41,6 +41,8 @@ button:hover {
     max-width: 500px;
 }
 
+/* `.show`クラスが追加されると、opacityが1になり、表示される */
 #question.show, #answer.show {
     opacity: 1;
 }
+
