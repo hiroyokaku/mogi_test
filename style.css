@@ -25,22 +25,4 @@ button:hover {
     background: linear-gradient(45deg, #45a049, #4CAF50);
 }
 
-#question, #answer {
-    visibility: hidden;
-    opacity: 0;
-    transition: opacity 1s ease-in-out, visibility 1s;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    margin: 20px auto;
-    max-width: 500px;
-}
 
-#question.show, #answer.show {
-    visibility: visible;
-    opacity: 1;
-}
-
-.hidden {
-    display: none;
-}
