@@ -28,3 +28,13 @@ button:hover {
     margin: 20px;
     line-height: 1.6; /* 読みやすくする */
 }
+
+
+#question, #answer {
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+#question.show, #answer.show {
+    opacity: 1;
+}
