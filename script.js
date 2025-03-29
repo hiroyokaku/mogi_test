@@ -1,19 +1,31 @@
-// イベントリスナー
-document.getElementById("fileInput").addEventListener("change", handleFileSelect);
-document.getElementById("loadFile").addEventListener("click", loadFile);
-document.getElementById("loadQuestion").addEventListener("click", loadRandomQuestion);
-document.getElementById("checkAnswer").addEventListener("click", checkAnswer);
-
-// グローバル変数
 let questions = [];
 let fileSelected = false; // ファイルが選択されたかチェック
 
-// ファイルが選択されたかをチェック
-function handleFileSelect(event) {
-    fileSelected = !!event.target.files[0]; // ファイルが選ばれたかチェック
+document.getElementById("fileInput").addEventListener("change", handleFileSelect);
+document.getElementById("loadFile").addEventListener("click", saveData);
+document.getElementById("loadQuestion").addEventListener("click", loadRandomQuestion);
+document.getElementById("checkAnswer").addEventListener("click", checkAnswer);
+
+function saveData() {
+    const fileInput = document.getElementById("fileInput");
+    if (!fileInput.files.length) {
+        alert("ファイルを選択してください！");
+        return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = function(event) {
+        localStorage.setItem("csvData", event.target.result); // データを保存
+        window.location.href = "quiz.html"; // クイズページへ移動
+    };
+    reader.readAsText(fileInput.files[0]);
 }
 
-// ファイルを読み込む
+// ファイルが選択されたかをチェック
+function handleFileSelect(event) {
+    fileSelected = !!event.target.files[0]; 
+}
+
 function loadFile() {
     if (!fileSelected) {
         alert("ファイルを選択してください！");
@@ -27,7 +39,7 @@ function loadFile() {
         const text = e.target.result;
         let rows = text.split("\n").map(row => row.split(","));
         rows.shift(); // ヘッダーを削除
-        questions = rows.filter(row => row.length >= 3); // 必要なデータが3つ以上ある行をフィルタリング
+        questions = rows.filter(row => row.length >= 3); // データのチェック
 
         if (questions.length > 0) {
             document.getElementById("loadQuestion").disabled = false;
@@ -37,11 +49,10 @@ function loadFile() {
             alert("正しいCSVファイルを選択してください。");
         }
     };
-
     reader.readAsText(file);
 }
 
-// ランダムな問題を読み込む
+// 問題文をランダムに読み込む
 function loadRandomQuestion() {
     const questionElement = document.getElementById("question");
     const answerElement = document.getElementById("answer");
@@ -50,11 +61,11 @@ function loadRandomQuestion() {
         questionElement.textContent = "問題がありません！";
         return;
     }
-    
-    let randomIndex = Math.floor(Math.random() * questions.length); // ランダムなインデックス
-    let questionText = questions[randomIndex][1].replace(/\n/g, "<br>"); // 改行をHTMLタグに変換
-    let answerText = questions[randomIndex][2]; // 答え
 
+    let randomIndex = Math.floor(Math.random() * questions.length);
+    let questionText = questions[randomIndex][1].replace(/\n/g, "<br>");
+    let answerText = questions[randomIndex][2];
+    
     questionElement.innerHTML = questionText;
     answerElement.textContent = answerText;
 
@@ -69,7 +80,7 @@ function showAnswer() {
     document.getElementById("showAnswerBtn").style.display = "none"; // 答えボタンを非表示
 }
 
-// ユーザーの答えをチェック
+// 答えを入力してもらって確認する
 function checkAnswer() {
     let userAnswer = document.getElementById("answer").value.trim();
     let correctAnswer = document.getElementById("question").dataset.answer.trim();
