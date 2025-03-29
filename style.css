@@ -1,7 +1,5 @@
 body {
-    background-color: #fff9c4; /* 淡い黄色 */
-    /* font-family: Arial, sans-serif;
-    /* font-size: 18px; /* 文字を大きめに */
+    background-color: #ffffff; /* 淡い黄色 */
     text-align: center;
     font-family: 'Roboto', sans-serif; /* ロボットフォントを使用 */
     font-size: 18px; /* フォントサイズ調整 */
@@ -24,25 +22,9 @@ button {
 }
 
 button:hover {
-   /* background-color: #ffca28; /* ホバー時に少し濃い黄色 */
-    background: linear-gradient(45deg, #45a049, #4CAF50); /* ホバー時に色変化 */
+    background-color: #ffca28; /* ホバー時に少し濃い黄色 */
+   /* background: linear-gradient(45deg, #45a049, #4CAF50);  ホバー時に色変化 */
 }
 
 
-
-#question, #answer {
-    opacity: 0;
-    transition: opacity 1s ease-in-out;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* カードの影 */
-    margin: 20px auto;
-    max-width: 500px;
-}
-
-/* `.show`クラスが追加されると、opacityが1になり、表示される */
-#question.show, #answer.show {
-    opacity: 1;
-}
 
