@@ -3,13 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>クイズアプリ</title>
     <link rel="stylesheet" href="style.css">
-    <title>問題データの読み込み</title>
 </head>
 <body>
-    <h1>問題データを選択してください</h1>
-    <input type="file" id="fileInput" accept=".csv">
-    <button id="loadFile", onclick="loadFile()">クイズを開始</button>
+    <h1>CSVクイズ</h1>
+
+    <!-- ファイル選択 -->
+    <input type="file" id="fileInput">
+    <button id="loadFile" onclick="saveData()">ファイルを読み込む</button>
+
+    <!-- クイズ表示ボタン -->
+    <button id="loadQuestion" disabled>問題を読み込む</button>
+    <button id="checkAnswer" disabled>答えを確認</button>
+
+    <!-- 問題文 -->
+    <div id="question" class="hidden">問題が表示されます</div>
+    
+    <!-- 答え -->
+    <div id="answer" class="hidden">答えが表示されます</div>
+
+    <!-- 答え表示ボタン -->
+    <button id="showAnswerBtn" style="display: none;" onclick="showAnswer()">答えを表示</button>
+
+    <!-- 結果表示 -->
+    <div id="result"></div>
 
     <script src="script.js"></script>
 </body>
