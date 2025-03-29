@@ -2,6 +2,15 @@ document.getElementById("fileInput").addEventListener("change", handleFileSelect
 document.getElementById("loadFile").addEventListener("click", loadFile);
 document.getElementById("loadQuestion").addEventListener("click", loadRandomQuestion);
 document.getElementById("checkAnswer").addEventListener("click", checkAnswer);
+
+
+// ファイルが選択されたかをチェック
+function handleFileSelect(event) {
+    fileSelected = !!event.target.files[0]; 
+}
+
+
+
 // ボタンをクリックした時に問題文を表示
 document.getElementById('showButton').addEventListener('click', function() {
     // 問題文を表示
@@ -13,10 +22,6 @@ document.getElementById('showButton').addEventListener('click', function() {
 let questions = [];
 let fileSelected = false; // ファイルが選択されたかチェック
 
-function handleFileSelect(event) {
-    fileSelected = !!event.target.files[0]; // ファイルが選択されたかをチェック
-}
-
 function loadFile() {
     if (!fileSelected) {
         alert("ファイルを選択してください！");
@@ -26,13 +31,22 @@ function loadFile() {
     const file = document.getElementById("fileInput").files[0];
     const reader = new FileReader();
 
+    //ファイルを読み込んだあとに動く処理が以下のfunction(e)
     reader.onload = function(e) {
         const text = e.target.result;
+        //最初のsplitで改行で分割、そして分割したものをカンマで分割（２回目のsplit）
         let rows = text.split("\n").map(row => row.split(","));
-        rows.shift(); // ヘッダーを削除
-        questions = rows.filter(row => row.length >= 3); // データのチェック
-        
+         // ヘッダーを削除
+        rows.shift();
+        // データチェック
+        //filter() を使って 「3つ以上のデータがある行だけを残す」
+        // 「問題番号・問題文・答え」の3つがそろっている行だけを questions に保存する
+        //データが不完全な行を削除し、問題データとして使えるものだけを残す
+        questions = rows.filter(row => row.length >= 3); 
+
+        //フィルタした数が１以上だったら問題として表示
         if (questions.length > 0) {
+            //非活性をfalse
             document.getElementById("loadQuestion").disabled = false;
             document.getElementById("checkAnswer").disabled = false;
             alert("データを読み込みました！");
@@ -49,16 +63,9 @@ function loadRandomQuestion() {
         document.getElementById("question").textContent = "問題が読み込めませんでした。";
         return;
     }
-//    let randomIndex = Math.floor(Math.random() * questions.length);
-//    document.getElementById("question").textContent = questions[randomIndex][1]; // B列の問題文
-//    document.getElementById("question").dataset.answer = questions[randomIndex][2]; // C列の答え
-    // `\n` を `<br>` に置換して表示
-    let questionText = questions[randomIndex][1].replace(/\n/g, "<br>");
-    
-    document.getElementById("question").innerHTML = questionText; // innerHTMLで改行を適用
+    let randomIndex = Math.floor(Math.random() * questions.length);
+    document.getElementById("question").textContent = questions[randomIndex][1]; // B列の問題文
     document.getElementById("question").dataset.answer = questions[randomIndex][2]; // C列の答え
-
-
 
 }
 
@@ -91,3 +98,18 @@ function loadRandomQuestion() {
     answerElement.classList.add("show");
 }
 
+
+       function saveData() {
+            const fileInput = document.getElementById("fileInput");
+            if (!fileInput.files.length) {
+                alert("ファイルを選択してください！");
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                localStorage.setItem("csvData", event.target.result); // データを保存
+                window.location.href = "quiz.html"; // クイズページへ移動
+            };
+            reader.readAsText(fileInput.files[0]);
+        }
