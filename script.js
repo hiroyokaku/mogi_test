@@ -11,7 +11,7 @@ document.getElementById("showAnswerBtn").addEventListener("click", showAnswer);
 function saveData() {
     const fileInput = document.getElementById("fileInput");
     if (!fileInput.files.length) {
-        alert("ファイルを選択してください！");
+        alert("ファイルを選択してください！！");
 alert("これは確認メッセージです！４");
 
         return;
