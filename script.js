@@ -9,6 +9,7 @@ fetch("data.csv")
         let rows = data.split("\n").map(row => row.split(","));
         rows.shift(); // ヘッダーを削除
         questions = rows;
+        alert("aaaaaa")
     });
 
 function loadRandomQuestion() {
