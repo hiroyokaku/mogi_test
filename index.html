@@ -3,22 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ランダム問題出題アプリ</title>
-    <link rel="stylesheet" href="style.css">
+    <title>問題データの読み込み</title>
 </head>
 <body>
-    <h1>ランダム問題出題</h1>
-
-    <!-- CSVファイル選択 -->
+    <h1>問題データを選択してください</h1>
     <input type="file" id="fileInput" accept=".csv">
-    <button id="loadFile">読み込む</button>
+    <button onclick="saveData()">クイズを開始</button>
 
-    <button id="loadQuestion" disabled>問題を出す</button>
-    <p id="question">ここに問題が表示されます</p>
-    <input type="text" id="answer" placeholder="答えを入力">
-    <button id="checkAnswer" disabled>答え合わせ</button>
-    <p id="result"></p>
+    <script>
+        function saveData() {
+            const fileInput = document.getElementById("fileInput");
+            if (!fileInput.files.length) {
+                alert("ファイルを選択してください！");
+                return;
+            }
 
-    <script src="script.js"></script>
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                localStorage.setItem("csvData", event.target.result); // データを保存
+                window.location.href = "quiz.html"; // クイズページへ移動
+            };
+            reader.readAsText(fileInput.files[0]);
+        }
+    </script>
 </body>
 </html>
