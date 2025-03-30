@@ -1,11 +1,30 @@
 body {
+    background-color: #fff9c4; /* 淡い黄色 */
     font-family: Arial, sans-serif;
+    font-size: 18px; /* 文字を大きめに */
     text-align: center;
-    margin: 50px;
+}
+
+h1 {
+    font-size: 24px; /* タイトルの文字を大きめに */
+    color: #444;
 }
 
 button {
-    padding: 10px 20px;
-    margin: 10px;
-    font-size: 16px;
+    font-size: 14px; /* ボタンの文字を少し小さく */
+    padding: 5px 10px; /* ボタン自体も小さく */
+    background-color: #ffd54f; /* 明るい黄色 */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #ffca28; /* ホバー時に少し濃い黄色 */
+}
+
+#question {
+    font-size: 20px; /* 問題文をさらに大きめに */
+    margin: 20px;
+    line-height: 1.6; /* 読みやすくする */
 }
