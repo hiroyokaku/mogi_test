@@ -32,7 +32,7 @@ function handleFileSelect(event) {
 
 function loadFile() {
     if (!fileSelected) {
-        alert("ファイルを選択してください！");
+        alert("ファイルを選択してくださいｓｓｓｓｓｓ！");
         alert("これは確認メッセージです！３");
 
         return;
