@@ -8,10 +8,14 @@
 </head>
 <body>
     <h1>ランダム問題出題</h1>
-    <button id="loadQuestion">問題を出す</button>
+
+    <!-- CSVファイル選択 -->
+    <input type="file" id="fileInput" accept=".csv">
+    
+    <button id="loadQuestion" disabled>問題を出す</button>
     <p id="question">ここに問題が表示されます</p>
     <input type="text" id="answer" placeholder="答えを入力">
-    <button id="checkAnswer">答え合わせ</button>
+    <button id="checkAnswer" disabled>答え合わせ</button>
     <p id="result"></p>
 
     <script src="script.js"></script>
