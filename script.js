@@ -6,8 +6,28 @@ document.getElementById("checkAnswer").addEventListener("click", checkAnswer);
 let questions = [];
 let fileSelected = false; // ファイルが選択されたかチェック
 
+
+        function saveData() {
+            const fileInput = document.getElementById("fileInput");
+            if (!fileInput.files.length) {
+                alert("ファイルを選択してください！");
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                localStorage.setItem("csvData", event.target.result); // データを保存
+                            };
+            reader.readAsText(fileInput.files[0]);
+        }
+
+
+
+
 function handleFileSelect(event) {
     fileSelected = !!event.target.files[0]; // ファイルが選択されたかをチェック
+    window.location.href = "quiz.html"; // クイズページへ移動
+
 }
 
 function loadFile() {
