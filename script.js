@@ -1,16 +1,26 @@
+document.getElementById("fileInput").addEventListener("change", handleFileSelect);
 document.getElementById("loadQuestion").addEventListener("click", loadRandomQuestion);
 document.getElementById("checkAnswer").addEventListener("click", checkAnswer);
 
 let questions = [];
 
-fetch("data.csv")
-    .then(response => response.text())
-    .then(data => {
-        let rows = data.split("\n").map(row => row.split(","));
+function handleFileSelect(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        const text = e.target.result;
+        let rows = text.split("\n").map(row => row.split(","));
         rows.shift(); // ヘッダーを削除
         questions = rows;
-        alert("aaaaaa")
-    });
+        
+        // ボタンを有効化
+        document.getElementById("loadQuestion").disabled = false;
+        document.getElementById("checkAnswer").disabled = false;
+    };
+    reader.readAsText(file);
+}
 
 function loadRandomQuestion() {
     if (questions.length === 0) {
