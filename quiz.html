@@ -12,44 +12,6 @@
     <button onclick="loadRandomQuestion()">次の問題</button>
     <button onclick="showAnswer()" style="display: none;" id="showAnswerBtn">答えを表示</button> <!-- 答え表示ボタン -->
 
-    <script>
-        let questions = [];
-        let currentQuestionIndex = null;
-
-        function loadData() {
-            const csvData = localStorage.getItem("csvData");
-            if (!csvData) {
-                alert("問題データがありません！");
-                window.location.href = "index.html";
-                return;
-            }
-            const lines = csvData.split("\n").map(line => line.split(","));
-            questions = lines.filter(row => row.length >= 3); // 問題がちゃんとあるかチェック
-            loadRandomQuestion();
-        }
-
-        function loadRandomQuestion() {
-            if (questions.length === 0) {
-                document.getElementById("question").textContent = "問題がありません！";
-                return;
-            }
-            currentQuestionIndex = Math.floor(Math.random() * questions.length);
-            let questionText = questions[currentQuestionIndex][1].replace(/\n/g, "<br>"); // 改行対応
-            let answerText = questions[currentQuestionIndex][2]; // 答えの取得
-            document.getElementById("question").innerHTML = questionText;
-            document.getElementById("answer").textContent = answerText;
-
-            // 答えを隠しておく
-            document.getElementById("answer").style.display = "none";
-            document.getElementById("showAnswerBtn").style.display = "inline"; // 答えボタンを表示
-        }
-
-        function showAnswer() {
-            document.getElementById("answer").style.display = "block"; // 答えを表示
-            document.getElementById("showAnswerBtn").style.display = "none"; // 答えボタンを非表示
-        }
-
-        window.onload = loadData;
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
