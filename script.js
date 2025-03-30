@@ -25,6 +25,7 @@ let fileSelected = false; // ファイルが選択されたかチェック
 
 
 function handleFileSelect(event) {
+        alert("aaaa")
     fileSelected = !!event.target.files[0]; // ファイルが選択されたかをチェック
     window.location.href = "quiz.html"; // クイズページへ移動
 
