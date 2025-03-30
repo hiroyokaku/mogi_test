@@ -8,10 +8,13 @@
 <body>
     <h1>クイズ開始！</h1>
     <p id="question">ここに問題が表示されます</p>
+    <p id="answer" style="display: none;">ここに答えが表示されます</p> <!-- 答えは最初非表示 -->
     <button onclick="loadRandomQuestion()">次の問題</button>
+    <button onclick="showAnswer()" style="display: none;" id="showAnswerBtn">答えを表示</button> <!-- 答え表示ボタン -->
 
     <script>
         let questions = [];
+        let currentQuestionIndex = null;
 
         function loadData() {
             const csvData = localStorage.getItem("csvData");
@@ -30,9 +33,20 @@
                 document.getElementById("question").textContent = "問題がありません！";
                 return;
             }
-            let randomIndex = Math.floor(Math.random() * questions.length);
-            let questionText = questions[randomIndex][1].replace(/\n/g, "<br>"); // 改行対応
+            currentQuestionIndex = Math.floor(Math.random() * questions.length);
+            let questionText = questions[currentQuestionIndex][1].replace(/\n/g, "<br>"); // 改行対応
+            let answerText = questions[currentQuestionIndex][2]; // 答えの取得
             document.getElementById("question").innerHTML = questionText;
+            document.getElementById("answer").textContent = answerText;
+
+            // 答えを隠しておく
+            document.getElementById("answer").style.display = "none";
+            document.getElementById("showAnswerBtn").style.display = "inline"; // 答えボタンを表示
+        }
+
+        function showAnswer() {
+            document.getElementById("answer").style.display = "block"; // 答えを表示
+            document.getElementById("showAnswerBtn").style.display = "none"; // 答えボタンを非表示
         }
 
         window.onload = loadData;
