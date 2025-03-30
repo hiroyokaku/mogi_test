@@ -12,6 +12,8 @@ function saveData() {
     const fileInput = document.getElementById("fileInput");
     if (!fileInput.files.length) {
         alert("ファイルを選択してください！");
+alert("これは確認メッセージです！４");
+
         return;
     }
 
@@ -31,7 +33,10 @@ function handleFileSelect(event) {
 function loadFile() {
     if (!fileSelected) {
         alert("ファイルを選択してください！");
+        alert("これは確認メッセージです！３");
+
         return;
+        
     }
 alert("これは確認メッセージです！");
 
