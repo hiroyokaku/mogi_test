@@ -6,6 +6,8 @@ document.getElementById("loadFile").addEventListener("click", loadFile);
 document.getElementById("loadQuestion").addEventListener("click", loadRandomQuestion);
 document.getElementById("showAnswerBtn").addEventListener("click", showAnswer);
 
+
+//ファイル選択ボタン押下処理
 function saveData() {
     const fileInput = document.getElementById("fileInput");
     if (!fileInput.files.length) {
@@ -31,6 +33,7 @@ function loadFile() {
         alert("ファイルを選択してください！");
         return;
     }
+alert("これは確認メッセージです！");
 
     const file = document.getElementById("fileInput").files[0];
     const reader = new FileReader();
